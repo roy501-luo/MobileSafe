@@ -26,6 +26,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +85,8 @@ public class SplashActivity extends Activity {
 			}
 		};
 	};
+	private SharedPreferences mPref;
+	private RelativeLayout rlRoot;// 根布局
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,22 +96,29 @@ public class SplashActivity extends Activity {
 		tvVersion.setText("版本名:" + getVersionName());
 		tvProgress = (TextView) findViewById(R.id.tv_progress);// 默认隐藏
 
-//		获取sharedPrences，检查是否设置了检查版本更新
-		SharedPreferences mPref = getSharedPreferences("config", MODE_PRIVATE);
-		boolean autoUpdate = mPref.getBoolean("auto_update",true);
-		if(autoUpdate){
+		rlRoot = (RelativeLayout) findViewById(R.id.rl_root);
+
+		mPref = getSharedPreferences("config", MODE_PRIVATE);
+
+		// 判断是否需要自动更新
+		boolean autoUpdate = mPref.getBoolean("auto_update", true);
+
+		if (autoUpdate) {
 			checkVerson();
-		}else {
-//			延时2s后进入主界面
-			mHandler.sendEmptyMessageDelayed(CODE_ENTER_HOME,2000);
+		} else {
+			mHandler.sendEmptyMessageDelayed(CODE_ENTER_HOME, 2000);// 延时2秒后发送消息
 		}
 
-		checkVerson();
+		// 渐变的动画效果
+		AlphaAnimation anim = new AlphaAnimation(0.3f, 1f);
+		anim.setDuration(2000);
+		rlRoot.startAnimation(anim);
 	}
 
 	/**
 	 * 获取版本名称
 	 * 
+	 * @return
 	 */
 	private String getVersionName() {
 		PackageManager packageManager = getPackageManager();
@@ -133,6 +144,7 @@ public class SplashActivity extends Activity {
 	/**
 	 * 获取本地app的版本号
 	 * 
+	 * @return
 	 */
 	private int getVersionCode() {
 		PackageManager packageManager = getPackageManager();
@@ -275,14 +287,11 @@ public class SplashActivity extends Activity {
 
 			String target = Environment.getExternalStorageDirectory()
 					+ "/update.apk";
-
-			System.out.println("文件存储位置:"+target);
-
 			// XUtils
 			HttpUtils utils = new HttpUtils();
 			utils.download(mDownloadUrl, target, new RequestCallBack<File>() {
 
-				// 下载文件的进度
+				// 下载文件的进度, 该方法在主线程运行
 				@Override
 				public void onLoading(long total, long current,
 						boolean isUploading) {
@@ -291,11 +300,11 @@ public class SplashActivity extends Activity {
 					tvProgress.setText("下载进度:" + current * 100 / total + "%");
 				}
 
-				// 下载成功
+				// 下载成功,该方法在主线程运行
 				@Override
 				public void onSuccess(ResponseInfo<File> arg0) {
 					System.out.println("下载成功");
-					// 跳转到系统下载页面
+					// 跳转到系统安装页面
 					Intent intent = new Intent(Intent.ACTION_VIEW);
 					intent.addCategory(Intent.CATEGORY_DEFAULT);
 					intent.setDataAndType(Uri.fromFile(arg0.result),
@@ -305,7 +314,7 @@ public class SplashActivity extends Activity {
 														// 会返回结果,回调方法onActivityResult
 				}
 
-				// 下载失败
+				// 下载失败,该方法在主线程运行
 				@Override
 				public void onFailure(HttpException arg0, String arg1) {
 					Toast.makeText(SplashActivity.this, "下载失败!",
