@@ -62,7 +62,6 @@ public class Setup3Activity extends BaseSetupActivity {
 	/**
 	 * 选择联系人
 	 *
-	 * @param view
 	 */
 	public void selectContact(View view) {
 		Intent intent = new Intent(this, ContactActivity.class);
