@@ -1,7 +1,7 @@
 package com.lolo.mobilesafe.receiver;
 
-import com.lolo.mobilesafe.service.LocationService;
 import com.lolo.mobilesafe.R;
+import com.lolo.mobilesafe.service.LocationService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

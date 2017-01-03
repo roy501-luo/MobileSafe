@@ -16,7 +16,6 @@ import android.widget.SimpleAdapter;
 
 import com.lolo.mobilesafe.R;
 
-
 public class ContactActivity extends Activity {
 
 	private ListView lvList;

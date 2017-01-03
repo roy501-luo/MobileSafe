@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:lolo="http://schemas.android.com/apk/res/com.lolo.mobilesafe"
+    xmlns:itheima="http://schemas.android.com/apk/res/com.itheima52.mobilesafe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -9,28 +9,28 @@
         style="@style/TitleStyle"
         android:text="设置中心" />
 
-    <com.lolo.mobilesafe.view.SettingItemView
+    <com.itheima52.mobilesafe.view.SettingItemView
         android:id="@+id/siv_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        lolo:desc_off="自动更新已关闭"
-        lolo:desc_on="自动更新已开启"
-        lolo:title="自动更新设置" />
+        itheima:desc_off="自动更新已关闭"
+        itheima:desc_on="自动更新已开启"
+        itheima:title="自动更新设置" />
 
-    <com.lolo.mobilesafe.view.SettingItemView
+    <com.itheima52.mobilesafe.view.SettingItemView
         android:id="@+id/siv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        lolo:desc_off="归属地显示已经关闭"
-        lolo:desc_on="归属地显示已经开启"
-        lolo:title="电话归属地显示设置" />
+        itheima:desc_off="归属地显示已经关闭"
+        itheima:desc_on="归属地显示已经开启"
+        itheima:title="电话归属地显示设置" />
 
-    <com.lolo.mobilesafe.view.SettingClickView
+    <com.itheima52.mobilesafe.view.SettingClickView
         android:id="@+id/scv_address_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <com.lolo.mobilesafe.view.SettingClickView
+    
+    <com.itheima52.mobilesafe.view.SettingClickView
         android:id="@+id/scv_address_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

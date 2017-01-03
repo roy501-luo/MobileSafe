@@ -1,6 +1,7 @@
 package com.lolo.mobilesafe.activity;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -31,12 +32,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lolo.mobilesafe.R;
+import com.lolo.mobilesafe.utils.StreamUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lolo.mobilesafe.R;
-import com.lolo.mobilesafe.utils.StreamUtils;
 
 public class SplashActivity extends Activity {
 
@@ -100,6 +101,8 @@ public class SplashActivity extends Activity {
 
 		mPref = getSharedPreferences("config", MODE_PRIVATE);
 
+		copyDB("address.db");// 拷贝归属地查询数据库
+
 		// 判断是否需要自动更新
 		boolean autoUpdate = mPref.getBoolean("auto_update", true);
 
@@ -118,7 +121,6 @@ public class SplashActivity extends Activity {
 	/**
 	 * 获取版本名称
 	 * 
-	 * @return
 	 */
 	private String getVersionName() {
 		PackageManager packageManager = getPackageManager();
@@ -144,7 +146,6 @@ public class SplashActivity extends Activity {
 	/**
 	 * 获取本地app的版本号
 	 * 
-	 * @return
 	 */
 	private int getVersionCode() {
 		PackageManager packageManager = getPackageManager();
@@ -342,5 +343,53 @@ public class SplashActivity extends Activity {
 		startActivity(intent);
 		finish();
 	}
+
+	/**
+	 * 拷贝数据库
+	 * 
+	 */
+	private void copyDB(String dbName) {
+//		 File filesDir = getFilesDir();
+//		 System.out.println("路径:" + filesDir.getAbsolutePath());
+		File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
+
+		if (destFile.exists()) {
+			System.out.println("数据库" + dbName + "已存在!");
+			return;
+		}
+
+		FileOutputStream out = null;
+		InputStream in = null;
+
+		try {
+			in = getAssets().open(dbName);
+			out = new FileOutputStream(destFile);
+
+			int len = 0;
+			byte[] buffer = new byte[1024];
+
+			while ((len = in.read(buffer)) != -1) {
+				out.write(buffer, 0, len);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+				out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+* 从服务器下载数据库
+*
+* */
+private void downloadDB(URL url) {
+}
+
 
 }

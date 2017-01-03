@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.lolo.mobilesafe.R;
 import com.lolo.mobilesafe.utils.MD5Utils;
 
-
 /**
  * 主页面
  * 
@@ -63,6 +62,11 @@ public class HomeActivity extends Activity {
 				case 0:
 					// 手机防盗
 					showPasswordDialog();
+					break;
+				case 7:
+					// 高级工具
+					startActivity(new Intent(HomeActivity.this,
+							AToolsActivity.class));
 					break;
 				case 8:
 					// 设置中心

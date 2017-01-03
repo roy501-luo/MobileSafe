@@ -10,10 +10,9 @@ import android.widget.TextView;
 
 import com.lolo.mobilesafe.R;
 
-
 /**
  * 手机防盗页面
- *
+ * 
  *
  */
 public class LostFindActivity extends Activity {
@@ -56,7 +55,8 @@ public class LostFindActivity extends Activity {
 
 	/**
 	 * 重新进入设置向导
-	 *
+	 * 
+	 * @param view
 	 */
 	public void reEnter(View view) {
 		startActivity(new Intent(this, Setup1Activity.class));

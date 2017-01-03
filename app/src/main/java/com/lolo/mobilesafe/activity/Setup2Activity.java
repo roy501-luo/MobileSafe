@@ -11,8 +11,6 @@ import com.lolo.mobilesafe.R;
 import com.lolo.mobilesafe.utils.ToastUtils;
 import com.lolo.mobilesafe.view.SettingItemView;
 
-
-
 /**
  * 第2个设置向导页
  * 

@@ -1,18 +1,19 @@
 package com.lolo.mobilesafe.activity;
 
-		import android.app.Activity;
-		import android.content.Intent;
-		import android.os.Bundle;
-		import android.text.TextUtils;
-		import android.view.View;
-		import android.widget.EditText;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-		import com.lolo.mobilesafe.R;
-		import com.lolo.mobilesafe.utils.ToastUtils;
+import com.lolo.mobilesafe.R;
+import com.lolo.mobilesafe.utils.ToastUtils;
 
 /**
  * 第3个设置向导页
- *
+ * 
  *
  */
 public class Setup3Activity extends BaseSetupActivity {
@@ -61,7 +62,8 @@ public class Setup3Activity extends BaseSetupActivity {
 
 	/**
 	 * 选择联系人
-	 *
+	 * 
+	 * @param view
 	 */
 	public void selectContact(View view) {
 		Intent intent = new Intent(this, ContactActivity.class);

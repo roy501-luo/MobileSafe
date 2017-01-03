@@ -8,10 +8,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.lolo.mobilesafe.R;
 
-
 /**
  * 第4个设置向导页
- *
+ * 
  *
  */
 public class Setup4Activity extends BaseSetupActivity {
@@ -41,7 +40,7 @@ public class Setup4Activity extends BaseSetupActivity {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
-										 boolean isChecked) {
+					boolean isChecked) {
 				if (isChecked) {
 					cbProtect.setText("防盗保护已经开启");
 					mPref.edit().putBoolean("protect", true).commit();

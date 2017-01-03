@@ -20,15 +20,12 @@
         android:textColor="#a000"
         android:textSize="18sp" />
 
-    <CheckBox
-        android:id="@+id/cb_status"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:src="@drawable/jiantou1_pressed" />
 
     <View
         android:layout_width="match_parent"
